@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Morpion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .gagnant {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu de Morpion</h1>
+    <table id="grille"></table>
+    <button id="nouvelle-grille">Nouvelle Grille</button>
+    <div id="message"></div>
+
+    <script>
+        const generateGrilleGagnante = () => {
+            const symbols = ['X', 'O'];
+            const grille = Array.from({ length: 3 }, () => Array(3).fill(null));
+
+            // Choisir un joueur gagnant aléatoire
+            const gagnant = symbols[Math.floor(Math.random() * symbols.length)];
+
+            // Créer une ligne gagnante aléatoire
+            const ligneGagnante = Math.floor(Math.random() * 3);
+            for (let i = 0; i < 3; i++) {
+                grille[ligneGagnante][i] = gagnant;
+            }
+
+            // Remplir les cases restantes avec des symboles aléatoires
+            grille.forEach((ligne, i) => {
+                ligne.forEach((cellule, j) => {
+                    if (cellule === null) {
+                        grille[i][j] = symbols[Math.floor(Math.random() * symbols.length)];
+                    }
+                });
+            });
+
+            return { grille, gagnant, ligneGagnante };
+        };
+
+        const afficherGrille = (grille) => {
+            const table = document.getElementById('grille');
+            table.innerHTML = ''; // Effacer la grille existante
+
+            grille.forEach((ligne, i) => {
+                const row = document.createElement('tr');
+                ligne.forEach((cellule, j) => {
+                    const cell = document.createElement('td');
+                    cell.textContent = cellule;
+                    cell.className = cellule === 'X' ? 'gagnant' : ''; // Juste pour la démo, vous pouvez le modifier
+                    row.appendChild(cell);
+                });
+                table.appendChild(row);
+            });
+        };
+
+        const jouer = () => {
+            const { grille, gagnant, ligneGagnante } = generateGrilleGagnante();
+            afficherGrille(grille);
+
+            const message = document.getElementById('message');
+            message.textContent = `Le joueur ${gagnant} a gagné à la ligne ${ligneGagnante + 1}!`;
+        };
+
+        document.getElementById('nouvelle-grille').addEventListener('click', jouer);
+
+        // Lancer le jeu la première fois
+        jouer();
+    </script>
+</body>
+</html>

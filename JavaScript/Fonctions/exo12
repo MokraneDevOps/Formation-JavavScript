@@ -1,0 +1,12 @@
+
+// exo 12
+
+// La portée des variables est essentielle en JavaScript. 
+// Les variables déclarées dans une fonction ne peuvent pas être utilisées en dehors de cette fonction, 
+// d'où l'erreur lors de la tentative d'accès à fullName après l'exécution de showName()
+
+// exo 13 
+
+// L'erreur met en évidence l'importance de comprendre la portée des variables en JavaScript.
+//  Les variables définies à l'intérieur d'une fonction ne sont pas accessibles en dehors de cette fonction, 
+//ce qui provoque l'erreur lorsqu'on essaie d'accéder à total après l'appel de sum().

@@ -1,0 +1,16 @@
+{
+  "name": "morpion-game",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "openMorpion.js",
+  "scripts": {
+    "start": "node openMorpion.js"
+  },
+  "dependencies": {
+    "open": "^9.1.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
