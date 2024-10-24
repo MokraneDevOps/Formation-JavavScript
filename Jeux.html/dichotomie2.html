@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeu Dichotomie</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0; /* Couleur de fond douce */
+      }
+      #game {
+        text-align: center;
+        background-color: #ffffff; /* Couleur de fond du jeu */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 300px; /* Largeur fixe */
+      }
+      h1 {
+        color: #333; /* Couleur du titre */
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        border: 2px solid #007bff; /* Bordure bleue */
+        border-radius: 5px;
+      }
+      button {
+        background-color: #007bff; /* Couleur bleue pour le bouton */
+        color: white; /* Couleur du texte en blanc */
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #0056b3; /* Couleur au survol */
+      }
+      #message {
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .correct {
+        color: green; /* Vert pour le message correct */
+      }
+      .incorrect {
+        color: red; /* Rouge pour le message incorrect */
+      }
+      .attempts {
+        color: orange; /* Orange pour le nombre d'essais */
+        font-size: 24px; /* Taille du texte pour les essais */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game">
+      <h1>Jeu Dichotomie</h1>
+      <p>Devinez un nombre entre 1 et 100 !</p>
+      <input type="number" id="guess" min="1" max="100" />
+      <button onclick="makeGuess()">Deviner</button>
+      <p id="message"></p>
+      <p id="attempts" class="attempts"></p>
+      <button onclick="startGame()">Recommencer le jeu</button>
+    </div>
+
+    <script>
+      let randomNumber; // Variable globale pour le nombre aléatoire
+      let attempts; // Variable globale pour le nombre d'essais
+
+      // Fonction appelée lorsque la page est chargée
+      function startGame() {
+        randomNumber = Math.floor(Math.random() * 100) + 1; // Générer un nombre aléatoire entre 1 et 100
+        attempts = 0; // Initialiser le nombre d'essais
+        document.getElementById("message").innerText =
+          "Le jeu a commencé, faites votre premier essai !";
+        document.getElementById("message").className = ""; // Réinitialiser la classe du message
+        document.getElementById("attempts").innerText = ""; // Réinitialiser le message des essais
+        document.getElementById("guess").value = ""; // Réinitialiser l'input
+      }
+
+      // Fonction appelée lorsque l'utilisateur clique sur le bouton deviner
+      function makeGuess() {
+        const guess = Number(document.getElementById("guess").value); // Récupérer le nombre entré par l'utilisateur
+        attempts++; // Incrémenter le nombre d'essais
+
+        // Vérifier si le nombre entré est valide
+        if (isNaN(guess) || guess < 1 || guess > 100) {
+          document.getElementById("message").innerText =
+            "Votre nombre n'est pas correct, recommencez !";
+          document.getElementById("message").className = "incorrect"; // Ajouter la classe incorrect
+          document.getElementById("attempts").innerText = ""; // Réinitialiser le message des essais
+          return; // Sortir de la fonction
+        }
+
+        // Vérifier si le nombre deviné est correct, trop petit ou trop grand
+        if (guess > randomNumber) {
+          document.getElementById("message").innerText = "Non ! C'est plus petit !";
+          document.getElementById("message").className = "incorrect"; // Ajouter la classe incorrect
+        } else if (guess < randomNumber) {
+          document.getElementById("message").innerText = "Non ! C'est plus grand !";
+          document.getElementById("message").className = "incorrect"; // Ajouter la classe incorrect
+        } else {
+          document.getElementById("message").innerText = "Bravo ! Vous avez trouvé le nombre !";
+          document.getElementById("message").className = "correct"; // Ajouter la classe correct
+        }
+
+        // Afficher le nombre d'essais
+        document.getElementById("attempts").innerText = `Nombre d'essais : ${attempts}`;
+      }
+
+      // Démarrer le jeu lorsque la page se charge
+      window.onload = startGame;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Click Me</title>
+    <style type="text/css">
+        body {
+            background-color: #b67332;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: white;
+            font-size: 200%;
+            cursor: pointer;
+            background-color: #93441a;
+            width: fit-content;
+            padding: 4px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        h1:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <h2>Jeu : Clic Me</h2>
+    <h1 id="titre">Click me 5 times!</h1>
+    <script>
+        let clickCount = 0; // Compteur de clics
+        let interval; // Variable pour stocker l'intervalle
+        let speed = 1000; // Vitesse initiale (en ms)
+
+        // Fonction pour déplacer le titre de manière aléatoire
+        function deplacerTitre() {
+            const newX = Math.random() * 500; // Position X aléatoire
+            const newY = Math.random() * 500; // Position Y aléatoire
+            const newFontSize = Math.random() * 40 + 20; // Taille de police aléatoire entre 20 et 60px
+
+            $("#titre").offset({ left: newX, top: newY }); // Déplacement
+            $("#titre").css("fontSize", newFontSize + "px"); // Changement de taille de police
+        }
+
+        // Fonction de gestion du clic
+        function gestionclick() {
+            clickCount++; // Incrémenter le compteur de clics
+            console.log("You clicked me! Count: " + clickCount);
+
+            if (clickCount >= 5) {
+                clearInterval(interval); // Arrêter l'intervalle
+                alert("Bravo! Vous avez gagné !"); // Afficher le message de victoire
+                return;
+            }
+
+            // Si le compteur est inférieur à 5, redémarrer l'intervalle plus rapide
+            clearInterval(interval); // Arrêter l'ancien intervalle
+            speed *= 0.9; // Réduire le temps d'intervalle de 10%
+            interval = setInterval(deplacerTitre, speed); // Créer un nouvel intervalle plus rapide
+        }
+
+        // Initialiser le jeu
+        interval = setInterval(deplacerTitre, speed); // Démarrer le premier intervalle
+        $("#titre").click(gestionclick); // Associer l'événement de clic
+    </script>
+</body>
+</html>
