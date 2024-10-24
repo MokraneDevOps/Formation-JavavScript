@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px; /* Largeur de la grille */
+        }
+
+        .tile {
+            width: 100px; /* Largeur de chaque case */
+            height: 100px; /* Hauteur de chaque case */
+            border: 2px solid #333; /* Bordure des cases */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px; /* Taille de la police */
+            cursor: pointer; /* Changement de curseur */
+            transition: background-color 0.3s;
+        }
+
+        .tile:hover {
+            background-color: #ddd; /* Couleur au survol */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tile" id="0_0"></div>
+        <div class="tile" id="0_1"></div>
+        <div class="tile" id="0_2"></div>
+        <div class="tile" id="1_0"></div>
+        <div class="tile" id="1_1"></div>
+        <div class="tile" id="1_2"></div>
+        <div class="tile" id="2_0"></div>
+        <div class="tile" id="2_1"></div>
+        <div class="tile" id="2_2"></div>
+    </div>
+
+    <script>
+        let tiles = document.getElementsByClassName("tile");
+        tiles = Array.from(tiles); // Convertir la collection en tableau
+
+        let currentPlayer = "X"; // Joueur courant
+        let board = Array(3).fill(null).map(() => Array(3).fill(null)); // État du jeu
+
+        const checkWinner = () => {
+            const winningCombinations = [
+                [[0, 0], [0, 1], [0, 2]], // Lignes
+                [[1, 0], [1, 1], [1, 2]],
+                [[2, 0], [2, 1], [2, 2]],
+                [[0, 0], [1, 0], [2, 0]], // Colonnes
+                [[0, 1], [1, 1], [2, 1]],
+                [[0, 2], [1, 2], [2, 2]],
+                [[0, 0], [1, 1], [2, 2]], // Diagonales
+                [[0, 2], [1, 1], [2, 0]]
+            ];
+
+            for (const combination of winningCombinations) {
+                const [a, b, c] = combination;
+                if (board[a[0]][a[1]] && board[a[0]][a[1]] === board[b[0]][b[1]] && board[a[0]][a[1]] === board[c[0]][c[1]]) {
+                    return board[a[0]][a[1]];
+                }
+            }
+            return null;
+        };
+
+        const resetGame = () => {
+            board = Array(3).fill(null).map(() => Array(3).fill(null));
+            tiles.forEach(tile => {
+                tile.innerHTML = "";
+            });
+            currentPlayer = "X";
+        };
+
+        const clickTile = (htmlEl, line, column) => {
+            board[line][column] = currentPlayer; // Mettre à jour l'état du jeu
+
+            const winner = checkWinner();
+            if (winner) {
+                setTimeout(() => {
+                    alert(`${winner} a gagné !`);
+                    resetGame();
+                }, 100);
+            } else if (board.flat().every(cell => cell)) {
+                setTimeout(() => {
+                    alert("C'est une égalité !");
+                    resetGame();
+                }, 100);
+            }
+        };
+
+        for (let i = 0; i < tiles.length; i++) {
+            const myTile = tiles[i];
+            myTile.addEventListener("click", () => {
+                if (myTile.innerHTML === "") { // Vérifier si la case est vide
+                    myTile.innerHTML = currentPlayer; // Marquer la case
+                    const [l, c] = myTile.id.split("_");
+                    clickTile(myTile, Number(l), Number(c)); // Appeler la fonction avec les coordonnées
+                    currentPlayer = currentPlayer === "X" ? "O" : "X"; // Changer de joueur
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion Générique</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px; /* Largeur de la grille (peut être modifiée) */
+        }
+
+        .tile {
+            flex: 1 0 calc(100% / var(--dimension)); /* Ajuster la taille des cases selon la dimension */
+            height: 0; /* Fixer la hauteur à 0 pour que flex-basis prenne le contrôle */
+            padding-bottom: calc(100% / var(--dimension)); /* Créer un aspect carré */
+            border: 2px solid #333; /* Bordure des cases */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px; /* Taille de la police */
+            cursor: pointer; /* Changement de curseur */
+            transition: background-color 0.3s;
+        }
+
+        .tile:hover {
+            background-color: #ddd; /* Couleur au survol */
+        }
+
+        .tile.disabled {
+            cursor: not-allowed; /* Changement du curseur pour les cases désactivées */
+            background-color: #e0e0e0; /* Couleur pour les cases désactivées */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="grid"></div>
+
+    <script>
+        const dimension = prompt("Quelle dimension ? (3 ou plus)") || 3; // Demander la dimension
+        const grid = document.getElementById('grid');
+
+        // Initialiser le tableau TTT avec la dimension choisie
+        let TTT = Array.from({ length: dimension }, () => Array(dimension).fill(null));
+        let currentLetter = "X"; // Lettre courante
+
+        // Générer la grille du morpion
+        const createGrid = () => {
+            grid.style.setProperty('--dimension', dimension); // Définir la variable CSS pour la dimension
+            for (let i = 0; i < dimension; i++) {
+                for (let j = 0; j < dimension; j++) {
+                    const tile = document.createElement('div');
+                    tile.className = 'tile';
+                    tile.id = `${i}_${j}`;
+                    grid.appendChild(tile);
+
+                    // Ajout de l'écouteur d'événement
+                    tile.addEventListener('click', () => {
+                        clickTile(tile, i, j);
+                    });
+                }
+            }
+        };
+
+        const checkWinner = () => {
+            // Vérifier les lignes et colonnes
+            for (let i = 0; i < dimension; i++) {
+                if (TTT[i].every(cell => cell === currentLetter)) return currentLetter; // Lignes
+                if (TTT.map(row => row[i]).every(cell => cell === currentLetter)) return currentLetter; // Colonnes
+            }
+
+            // Vérifier les diagonales
+            if (TTT.map((row, idx) => row[idx]).every(cell => cell === currentLetter)) return currentLetter; // Diagonale principale
+            if (TTT.map((row, idx) => row[dimension - 1 - idx]).every(cell => cell === currentLetter)) return currentLetter; // Diagonale secondaire
+
+            return null;
+        };
+
+        const resetGame = () => {
+            TTT = Array.from({ length: dimension }, () => Array(dimension).fill(null));
+            const tiles = document.getElementsByClassName("tile");
+            Array.from(tiles).forEach(tile => {
+                tile.innerHTML = "";
+                tile.classList.remove("disabled");
+            });
+            currentLetter = "X"; // Réinitialiser la lettre courante
+        };
+
+        const clickTile = (htmlEl, line, column) => {
+            if (TTT[line][column] === null) { // Vérifier si la case est vide
+                TTT[line][column] = currentLetter; // Mettre à jour la mémoire du jeu
+                htmlEl.innerHTML = currentLetter; // Afficher la lettre dans la case
+                htmlEl.classList.add("disabled"); // Désactiver le clic sur la case
+
+                const winner = checkWinner();
+                if (winner) {
+                    setTimeout(() => {
+                        alert(`${winner} a gagné !`);
+                        resetGame();
+                    }, 100);
+                } else if (TTT.flat().every(cell => cell)) {
+                    setTimeout(() => {
+                        alert("C'est une égalité !");
+                        resetGame();
+                    }, 100);
+                }
+
+                currentLetter = currentLetter === "X" ? "O" : "X"; // Changer de joueur
+            }
+        };
+
+        createGrid(); // Appeler la fonction pour créer la grille
+    </script>
+</body>
+</html>
