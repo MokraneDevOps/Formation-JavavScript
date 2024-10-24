@@ -3,218 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morpion Générique</title>
+    <title>Le jeu du Morpion</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            background-color: LightSteelBlue;
+            text-align: center;
         }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            width: 300px; /* Largeur de la grille (peut être modifiée) */
-            margin-bottom: 20px;
+        #Jeu {
+            display: inline-block;
+            background-color: SteelBlue;
+            margin: 0 auto;
+            padding: 10px;
         }
-
-        .tile {
-            flex: 1 0 calc(100% / var(--dimension)); /* Ajuster la taille des cases selon la dimension */
-            height: 0; /* Fixer la hauteur à 0 pour que flex-basis prenne le contrôle */
-            padding-bottom: calc(100% / var(--dimension)); /* Créer un aspect carré */
-            border: 2px solid #333; /* Bordure des cases */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px; /* Taille de la police */
-            cursor: pointer; /* Changement de curseur */
-            transition: background-color 0.3s;
-            background-color: #ffffff; /* Couleur de fond par défaut des cases */
+        #Jeu div {
+            margin: 0 auto;
+            overflow: hidden;
         }
-
-        .tile:hover {
-            background-color: #e0e0e0; /* Couleur au survol */
-        }
-
-        .tile.disabled {
-            cursor: not-allowed; /* Changement du curseur pour les cases désactivées */
-            background-color: #e0e0e0; /* Couleur pour les cases désactivées */
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            background-color: #007bff; /* Couleur du bouton */
-            color: white; /* Couleur du texte */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3; /* Couleur au survol */
-        }
-
-        .attempts {
-            margin: 10px 0;
-            font-size: 18px;
-            color: #333; /* Couleur du texte pour les essais */
-        }
-
-        .playerX {
-            color: blue; /* Couleur pour le joueur X */
-        }
-
-        .playerO {
-            color: red; /* Couleur pour le joueur O */
-        }
-
-        .winner {
-            font-size: 20px;
+        #Jeu button {
+            width: 100px;
+            height: 100px;
             font-weight: bold;
-            color: green; /* Couleur pour le message de victoire */
+            font-size: 50px;
+            margin: 5px;
+            float: left;
+        }
+        #StatutJeu {
+            color: black;
+            background: #eee;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 20px;
+        }
+        #Scores {
             margin-top: 20px;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <h1>Morpion Générique</h1>
-    <label for="player1">Joueur 1 (X):</label>
-    <input type="text" id="player1" placeholder="Nom du joueur 1">
-    <label for="player2">Joueur 2 (O):</label>
-    <input type="text" id="player2" placeholder="Nom du joueur 2">
-    <label for="dimension">Dimension:</label>
-    <input type="number" id="dimension" min="3" placeholder="Dimension (3 ou plus)">
-    <button id="startBtn">Commencer le Jeu</button>
-    
-    <div class="container" id="grid"></div>
-    
-    <div class="attempts" id="attempts"></div>
-    <div class="winner" id="winnerMessage"></div> <!-- Zone pour afficher le message de victoire -->
-    
-    <button id="resetBtn" style="display: none;">Recommencer le Jeu</button>
+    <h1>Le jeu du morpion</h1>
+    <div id="Jeu">
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div id="StatutJeu"></div>
+    </div>
+
+    <div id="Scores">
+        <p>Joueur 1 (X): <span id="score1">0</span> essais</p>
+        <p>Joueur 2 (O): <span id="score2">0</span> essais</p>
+    </div>
 
     <script>
-        let dimension;
-        let grid;
-        let currentLetter = "X";
-        let player1, player2;
-        let TTT;
-        let attempts;
+        let essais = [0, 0]; // Compteur d'essais pour chaque joueur
 
-        const startGame = () => {
-            player1 = document.getElementById('player1').value || "Joueur 1";
-            player2 = document.getElementById('player2').value || "Joueur 2";
-            dimension = parseInt(document.getElementById('dimension').value) || 3;
+        function estValide(button) {
+            return button.innerHTML.length == 0;
+        }
 
-            if (dimension < 3) {
-                alert("La dimension doit être 3 ou plus !");
-                return;
-            }
+        function setSymbol(btn, symbole) {
+            btn.innerHTML = symbole;
+        }
 
-            document.getElementById('grid').innerHTML = '';
-            attempts = { [player1]: 0, [player2]: 0 }; // Initialiser le tableau des essais
-            TTT = Array.from({ length: dimension }, () => Array(dimension).fill(null)); // Initialiser TTT
-            createGrid(); // Créer la grille
-            updateAttempts(); // Mettre à jour l'affichage des essais
-            document.getElementById('winnerMessage').innerHTML = ""; // Réinitialiser le message de victoire
-            document.getElementById('resetBtn').style.display = 'none'; // Masquer le bouton de réinitialisation
-        };
-
-        const createGrid = () => {
-            grid = document.getElementById('grid');
-            grid.style.setProperty('--dimension', dimension); // Définir la variable CSS pour la dimension
-            for (let i = 0; i < dimension; i++) {
-                for (let j = 0; j < dimension; j++) {
-                    const tile = document.createElement('div');
-                    tile.className = 'tile';
-                    tile.id = `${i}_${j}`;
-                    grid.appendChild(tile);
-
-                    // Ajout de l'écouteur d'événement
-                    tile.addEventListener('click', () => {
-                        clickTile(tile, i, j);
-                    });
+        function rechercherVainqueur(pions, joueurs, tour) {
+            // Vérification des lignes
+            for (let i = 0; i < 3; i++) {
+                if (pions[i * 3].innerHTML == joueurs[tour] &&
+                    pions[i * 3 + 1].innerHTML == joueurs[tour] &&
+                    pions[i * 3 + 2].innerHTML == joueurs[tour]) {
+                    pions[i * 3].style.backgroundColor = "#9ACD32";
+                    pions[i * 3 + 1].style.backgroundColor = "#9ACD32";
+                    pions[i * 3 + 2].style.backgroundColor = "#9ACD32";
+                    return true;
                 }
             }
-        };
-
-        const checkWinner = () => {
-            // Vérifier les lignes et colonnes
-            for (let i = 0; i < dimension; i++) {
-                if (TTT[i].every(cell => cell === currentLetter)) return currentLetter; // Lignes
-                if (TTT.map(row => row[i]).every(cell => cell === currentLetter)) return currentLetter; // Colonnes
-            }
-
-            // Vérifier les diagonales
-            if (TTT.map((row, idx) => row[idx]).every(cell => cell === currentLetter)) return currentLetter; // Diagonale principale
-            if (TTT.map((row, idx) => row[dimension - 1 - idx]).every(cell => cell === currentLetter)) return currentLetter; // Diagonale secondaire
-
-            return null;
-        };
-
-        const resetGame = () => {
-            TTT = Array.from({ length: dimension }, () => Array(dimension).fill(null)); // Réinitialiser TTT
-            const tiles = document.getElementsByClassName("tile");
-            Array.from(tiles).forEach(tile => {
-                tile.innerHTML = "";
-                tile.classList.remove("disabled");
-                tile.style.backgroundColor = "#ffffff"; // Réinitialiser la couleur de fond
-            });
-            currentLetter = "X"; // Réinitialiser la lettre courante
-            resetAttempts(); // Réinitialiser le tableau des essais
-            updateAttempts(); // Mettre à jour les essais
-            document.getElementById('winnerMessage').innerHTML = ""; // Réinitialiser le message de victoire
-        };
-
-        const resetAttempts = () => {
-            attempts = { [player1]: 0, [player2]: 0 }; // Réinitialiser le tableau des essais
-        };
-
-        const updateAttempts = () => {
-            const attemptsDiv = document.getElementById('attempts');
-            attemptsDiv.innerHTML = `${player1} (X): <span class="playerX">${attempts[player1]}</span> | ${player2} (O): <span class="playerO">${attempts[player2]}</span>`;
-        };
-
-        const displayWinner = (winner) => {
-            const winnerMessage = document.getElementById('winnerMessage');
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString('fr-FR', options);
-            winnerMessage.innerHTML = `${winner === "X" ? player1 : player2} a gagné !<br>Date : ${formattedDate}`;
-        };
-
-        const clickTile = (htmlEl, line, column) => {
-            if (TTT[line][column] === null) { // Vérifier si la case est vide
-                TTT[line][column] = currentLetter; // Mettre à jour la mémoire du jeu
-                htmlEl.innerHTML = currentLetter; // Afficher la lettre dans la case
-                htmlEl.classList.add("disabled"); // Désactiver le clic sur la case
-                attempts[currentLetter === "X" ? player1 : player2]++; // Incrémenter le compteur d'essais
-                updateAttempts(); // Mettre à jour l'affichage des essais
-
-                // Appliquer les couleurs pour les joueurs
-                htmlEl.style.color = currentLetter === "X" ? "blue" : "red";
-
-                const winner = checkWinner();
-                if (winner) {
-                    displayWinner(winner); // Afficher le gagnant
-                    document.getElementById('resetBtn').style.display = 'block'; // Afficher le bouton de réinitialisation
-                    return;
+            // Vérification des colonnes
+            for (let i = 0; i < 3; i++) {
+                if (pions[i].innerHTML == joueurs[tour] &&
+                    pions[i + 3].innerHTML == joueurs[tour] &&
+                    pions[i + 6].innerHTML == joueurs[tour]) {
+                    pions[i].style.backgroundColor = "#9ACD32";
+                    pions[i + 3].style.backgroundColor = "#9ACD32";
+                    pions[i + 6].style.backgroundColor = "#9ACD32";
+                    return true;
                 }
-
-                // Changer de joueur
-                currentLetter = currentLetter === "X" ? "O" : "X";
             }
+            // Vérification des diagonales
+            if (pions[0].innerHTML == joueurs[tour] &&
+                pions[4].innerHTML == joueurs[tour] &&
+                pions[8].innerHTML == joueurs[tour]) {
+                pions[0].style.backgroundColor = "#9ACD32";
+                pions[4].style.backgroundColor = "#9ACD32";
+                pions[8].style.backgroundColor = "#9ACD32";
+                return true;
+            }
+            if (pions[2].innerHTML == joueurs[tour] &&
+                pions[4].innerHTML == joueurs[tour] &&
+                pions[6].innerHTML == joueurs[tour]) {
+                pions[2].style.backgroundColor = "#9ACD32";
+                pions[4].style.backgroundColor = "#9ACD32";
+                pions[6].style.backgroundColor = "#9ACD32";
+                return true;
+            }
+            return false;
+        }
+
+        function matchNul(pions) {
+            for (var i = 0, len = pions.length; i < len; i++) {
+                if (pions[i].innerHTML.length == 0) return false;
+            }
+            return true;
+        }
+
+        var Afficheur = function(element) {
+            var affichage = element;
+
+            function setText(message) {
+                affichage.innerHTML = message;
+            }
+
+            return { sendMessage: setText };
         };
 
-        document.getElementById('startBtn').addEventListener('click', startGame);
-        document.getElementById('resetBtn').addEventListener('click', resetGame);
+        function main() {
+            var pions = document.querySelectorAll("#Jeu button");
+            var joueurs = ["X", "O"];
+            var tour = 0;
+            var jeuEstFini = false;
+            var afficheur = new Afficheur(document.querySelector("#StatutJeu"));
+            afficheur.sendMessage(
+                "Le jeu peut commencer ! <br /> Joueur " +
+                joueurs[tour] +
+                " c'est votre tour."
+            );
+
+            for (var i = 0, len = pions.length; i < len; i++) {
+                pions[i].addEventListener("click", function() {
+                    if (jeuEstFini) return;
+
+                    if (!estValide(this)) {
+                        afficheur.sendMessage(
+                            "Case occupée ! <br />Joueur " +
+                            joueurs[tour] +
+                            " c'est toujours à vous !"
+                        );
+                    } else {
+                        setSymbol(this, joueurs[tour]);
+                        essais[tour]++; // Incrémenter le compteur d'essais pour le joueur actuel
+                        document.getElementById("score" + (tour + 1)).innerText = essais[tour];
+
+                        jeuEstFini = rechercherVainqueur(pions, joueurs, tour);
+
+                        if (jeuEstFini) {
+                            afficheur.sendMessage(
+                                "Le joueur " +
+                                joueurs[tour] +
+                                ' a gagné ! <br /> <a href="#">Rejouer</a>'
+                            );
+                            return;
+                        }
+
+                        if (matchNul(pions)) {
+                            afficheur.sendMessage(
+                                'Match Nul ! <br/> <a href="#">Rejouer</a>'
+                            );
+                            return;
+                        }
+
+                        tour++;
+                        tour = tour % 2;
+                        afficheur.sendMessage("Joueur " + joueurs[tour] + " c'est à vous !");
+                    }
+                });
+            }
+        }
+
+        main();
     </script>
 </body>
 </html>

@@ -3,132 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morpion</title>
+    <title>Le jeu du Morpion</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            background-color: LightSteelBlue;
+            text-align: center;
         }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            width: 300px; /* Largeur de la grille */
+        #Jeu {
+            display: inline-block;
+            background-color: SteelBlue;
+            margin: 0 auto;
+            padding: 10px;
         }
-
-        .tile {
-            width: 100px; /* Largeur de chaque case */
-            height: 100px; /* Hauteur de chaque case */
-            border: 2px solid #333; /* Bordure des cases */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px; /* Taille de la police */
-            cursor: pointer; /* Changement de curseur */
-            transition: background-color 0.3s;
+        #Jeu div {
+            margin: 0 auto;
+            overflow: hidden;
         }
-
-        .tile:hover {
-            background-color: #ddd; /* Couleur au survol */
+        #Jeu button {
+            width: 100px;
+            height: 100px;
+            font-weight: bold;
+            font-size: 50px;
+            margin: 5px;
+            float: left;
         }
-
-        .tile.disabled {
-            cursor: not-allowed; /* Changement du curseur pour les cases désactivées */
-            background-color: #e0e0e0; /* Couleur pour les cases désactivées */
+        #StatutJeu {
+            color: black;
+            background: #eee;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 20px;
+        }
+        #Scores {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .win-message {
+            color: green;
+        }
+        .error-message {
+            color: red;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="tile" id="0_0"></div>
-        <div class="tile" id="0_1"></div>
-        <div class="tile" id="0_2"></div>
-        <div class="tile" id="1_0"></div>
-        <div class="tile" id="1_1"></div>
-        <div class="tile" id="1_2"></div>
-        <div class="tile" id="2_0"></div>
-        <div class="tile" id="2_1"></div>
-        <div class="tile" id="2_2"></div>
+    <h1>Le jeu du morpion</h1>
+    <div id="Jeu">
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div id="StatutJeu"></div>
+    </div>
+
+    <div id="Scores">
+        <p>Joueur 1 (<span id="symbol1">X</span>): <span id="score1">0</span> essais</p>
+        <p>Joueur 2 (<span id="symbol2">O</span>): <span id="score2">0</span> essais</p>
     </div>
 
     <script>
-        let TTT = [
-            [null, null, null],
-            [null, null, null],
-            [null, null, null],
-        ];
+        let essais = [0, 0]; // Compteur d'essais pour chaque joueur
+        let joueurs = ["", ""]; // Noms des joueurs
 
-        let currentLetter = "X"; // Lettre courante
-        let tiles = document.getElementsByClassName("tile");
-        tiles = Array.from(tiles); // Convertir la collection en tableau
-
-        const checkWinner = () => {
-            const winningCombinations = [
-                [[0, 0], [0, 1], [0, 2]], // Lignes
-                [[1, 0], [1, 1], [1, 2]],
-                [[2, 0], [2, 1], [2, 2]],
-                [[0, 0], [1, 0], [2, 0]], // Colonnes
-                [[0, 1], [1, 1], [2, 1]],
-                [[0, 2], [1, 2], [2, 2]],
-                [[0, 0], [1, 1], [2, 2]], // Diagonales
-                [[0, 2], [1, 1], [2, 0]]
-            ];
-
-            for (const combination of winningCombinations) {
-                const [a, b, c] = combination;
-                if (TTT[a[0]][a[1]] && TTT[a[0]][a[1]] === TTT[b[0]][b[1]] && TTT[a[0]][a[1]] === TTT[c[0]][c[1]]) {
-                    return TTT[a[0]][a[1]];
-                }
-            }
-            return null;
-        };
-
-        const resetGame = () => {
-            TTT = [
-                [null, null, null],
-                [null, null, null],
-                [null, null, null],
-            ];
-            tiles.forEach(tile => {
-                tile.innerHTML = "";
-                tile.classList.remove("disabled");
-            });
-            currentLetter = "X";
-        };
-
-        const clickTile = (htmlEl, line, column) => {
-            if (TTT[line][column] === null) { // Vérifier si la case est vide
-                TTT[line][column] = currentLetter; // Mettre à jour la mémoire du jeu
-                htmlEl.innerHTML = currentLetter; // Afficher la lettre dans la case
-                htmlEl.classList.add("disabled"); // Désactiver le clic sur la case
-
-                const winner = checkWinner();
-                if (winner) {
-                    setTimeout(() => {
-                        alert(`${winner} a gagné !`);
-                        resetGame();
-                    }, 100);
-                } else if (TTT.flat().every(cell => cell)) {
-                    setTimeout(() => {
-                        alert("C'est une égalité !");
-                        resetGame();
-                    }, 100);
-                }
-
-                currentLetter = currentLetter === "X" ? "O" : "X"; // Changer de joueur
-            }
-        };
-
-        for (let i = 0; i < tiles.length; i++) {
-            const myTile = tiles[i];
-            myTile.addEventListener("click", () => {
-                clickTile(myTile, Math.floor(i / 3), i % 3); // Calculer ligne et colonne
-            });
+        // Fonction pour demander les noms des joueurs
+        function demanderNoms() {
+            joueurs[0] = prompt("Entrez le nom du Joueur 1 (X):");
+            joueurs[1] = prompt("Entrez le nom du Joueur 2 (O):");
+            document.getElementById("symbol1").textContent = joueurs[0] + " (X)";
+            document.getElementById("symbol2").textContent = joueurs[1] + " (O)";
         }
+
+        function estValide(button) {
+            return button.innerHTML.length == 0;
+        }
+
+        function setSymbol(btn, symbole) {
+            btn.innerHTML = symbole;
+        }
+
+        function rechercherVainqueur(pions, tour) {
+            // Vérification des lignes
+            for (let i = 0; i < 3; i++) {
+                if (pions[i * 3].innerHTML == joueurs[tour] &&
+                    pions[i * 3 + 1].innerHTML == joueurs[tour] &&
+                    pions[i * 3 + 2].innerHTML == joueurs[tour]) {
+                    pions[i * 3].style.backgroundColor = "#9ACD32";
+                    pions[i * 3 + 1].style.backgroundColor = "#9ACD32";
+                    pions[i * 3 + 2].style.backgroundColor = "#9ACD32";
+                    return true;
+                }
+            }
+            // Vérification des colonnes
+            for (let i = 0; i < 3; i++) {
+                if (pions[i].innerHTML == joueurs[tour] &&
+                    pions[i + 3].innerHTML == joueurs[tour] &&
+                    pions[i + 6].innerHTML == joueurs[tour]) {
+                    pions[i].style.backgroundColor = "#9ACD32";
+                    pions[i + 3].style.backgroundColor = "#9ACD32";
+                    pions[i + 6].style.backgroundColor = "#9ACD32";
+                    return true;
+                }
+            }
+            // Vérification des diagonales
+            if (pions[0].innerHTML == joueurs[tour] &&
+                pions[4].innerHTML == joueurs[tour] &&
+                pions[8].innerHTML == joueurs[tour]) {
+                pions[0].style.backgroundColor = "#9ACD32";
+                pions[4].style.backgroundColor = "#9ACD32";
+                pions[8].style.backgroundColor = "#9ACD32";
+                return true;
+            }
+            if (pions[2].innerHTML == joueurs[tour] &&
+                pions[4].innerHTML == joueurs[tour] &&
+                pions[6].innerHTML == joueurs[tour]) {
+                pions[2].style.backgroundColor = "#9ACD32";
+                pions[4].style.backgroundColor = "#9ACD32";
+                pions[6].style.backgroundColor = "#9ACD32";
+                return true;
+            }
+            return false;
+        }
+
+        function matchNul(pions) {
+            for (var i = 0, len = pions.length; i < len; i++) {
+                if (pions[i].innerHTML.length == 0) return false;
+            }
+            return true;
+        }
+
+        var Afficheur = function(element) {
+            var affichage = element;
+
+            function setText(message, isWinMessage = false) {
+                affichage.innerHTML = message;
+                affichage.className = isWinMessage ? 'win-message' : 'error-message';
+            }
+
+            return { sendMessage: setText };
+        };
+
+        function main() {
+            demanderNoms(); // Demander les noms des joueurs au début
+            var pions = document.querySelectorAll("#Jeu button");
+            var tour = 0;
+            var jeuEstFini = false;
+            var afficheur = new Afficheur(document.querySelector("#StatutJeu"));
+            afficheur.sendMessage(
+                "Le jeu peut commencer ! <br /> " +
+                joueurs[tour] + " (X), c'est votre tour."
+            );
+
+            for (var i = 0, len = pions.length; i < len; i++) {
+                pions[i].addEventListener("click", function() {
+                    if (jeuEstFini) return;
+
+                    if (!estValide(this)) {
+                        afficheur.sendMessage(
+                            "Case occupée ! <br /> " +
+                            joueurs[tour] + " c'est toujours à vous !"
+                        );
+                    } else {
+                        setSymbol(this, tour === 0 ? "X" : "O");
+                        essais[tour]++; // Incrémenter le compteur d'essais pour le joueur actuel
+                        document.getElementById("score" + (tour + 1)).innerText = essais[tour];
+
+                        jeuEstFini = rechercherVainqueur(pions, tour);
+
+                        if (jeuEstFini) {
+                            afficheur.sendMessage(
+                                "Bravo " + joueurs[tour] + ", vous avez gagné ! <br /> <a href=\"#\" onclick=\"location.reload();\">Rejouer</a>",
+                                true
+                            );
+                            return;
+                        }
+
+                        if (matchNul(pions)) {
+                            afficheur.sendMessage(
+                                'Match Nul ! <br/> <a href=\"#\" onclick=\"location.reload();\">Rejouer</a>'
+                            );
+                            return;
+                        }
+
+                        tour++;
+                        tour = tour % 2;
+                        afficheur.sendMessage(joueurs[tour] + " c'est à vous !");
+                    }
+                });
+            }
+        }
+
+        main();
     </script>
 </body>
 </html>
