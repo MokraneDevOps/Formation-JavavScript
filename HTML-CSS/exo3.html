@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie d'Images de Chats</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: flex-start; /* Les boîtes ne seront pas centrées */
+            flex-wrap: wrap;             /* Permet l'enroulement des éléments */
+            padding: 20px;               /* Espace autour de la galerie */
+            background-color: #f0f0f0;   /* Couleur d'arrière-plan douce */
+        }
+
+        .gallery-container {
+            display: flex;               /* Utilise Flexbox pour contenir les images */
+            flex-wrap: wrap;             /* Permet l'enroulement des éléments */
+            border: 2px solid blue;      /* Bordure bleue autour de la galerie */
+            background-color: white;      /* Fond blanc pour le conteneur */
+            /* padding: 10px;               /* Espace intérieur du conteneur */
+        }
+
+        .image-container {
+            width: 300px;                /* Largeur de 300px pour chaque image */
+            height: 300px;               /* Hauteur de 300px pour chaque image */
+            margin: 10px;                /* Espace de 10px autour de chaque image */
+            overflow: hidden;            /* Cache tout débordement */
+            border: 2px solid red;       /* Bordure rouge autour de chaque image */
+            border-radius: 10px;         /* Coins arrondis pour un effet esthétique */
+            position: relative;          /* Position relative pour le numéro de chat */
+        }
+
+        img {
+            width: 100%;                 /* Remplit la largeur du conteneur */
+            height: calc(100% - 40px);  /* Remplit la hauteur du conteneur, laissant un espace pour le texte */
+            object-fit: cover;           /* Recouvre complètement le conteneur */
+            margin-bottom: 10px;         /* Espace blanc entre l'image et l'espace vert */
+        }
+
+        .spacer {
+            height: 30px;                /* Hauteur de l'espace en bas de l'image */
+            width: 100%;                 /* Largeur à 100% du conteneur */
+            background-color: rgb(140, 212, 140);     /* Couleur verte pour l'espace */
+            position: absolute;          /* Positionnement absolu pour le spacer */
+            bottom: 0;                   /* Aligne le spacer en bas du conteneur */
+            display: flex;               /* Utilise Flexbox pour centrer le texte */
+            justify-content: center;     /* Centre horizontalement le texte */
+            align-items: center;         /* Centre verticalement le texte */
+            color: white;                /* Couleur du texte en blanc pour contraste */
+            font-weight: bold;           /* Met le texte en gras */
+            font-size: 20px;             /* Taille de la police pour le numéro */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-container">
+        <div class="image-container">
+            <img src="https://img.freepik.com/photos-premium/groupe-adorables-chats-blottis-ensemble-dans-fort-douillet_986714-1126.jpg" alt="Groupe de chats">
+            <div class="spacer">Chat 1</div> <!-- Espace en bas de l'image -->
+        </div>
+        
+        <div class="image-container">
+            <img src="https://archzine.fr/wp-content/uploads/2016/01/image-de-chaton-trop-mignon-chatons-mignons-asleep.jpg" alt="Chaton mignon">
+            <div class="spacer">Chat 2</div> <!-- Espace en bas de l'image -->
+        </div>
+
+        <div class="image-container">
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=4000x3000:format=jpg/path/s5dde8bff85c81b2f/image/ia932f710bc9f0af9/version/1560445533/image.jpg" alt="Chat en train de dormir">
+            <div class="spacer">Chat 3</div> <!-- Espace en bas de l'image -->
+        </div>
+        
+        <div class="image-container">
+            <img src="https://archzine.fr/wp-content/uploads/2016/01/image-de-chaton-trop-mignon-chatons-mignons-asleep.jpg" alt="Chaton mignon">
+            <div class="spacer">Chat 4</div> <!-- Espace en bas de l'image -->
+        </div>
+
+        <div class="image-container">
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=4000x3000:format=jpg/path/s5dde8bff85c81b2f/image/ia932f710bc9f0af9/version/1560445533/image.jpg" alt="Chat en train de dormir">
+            <div class="spacer">Chat 5</div> <!-- Espace en bas de l'image -->
+        </div>
+        
+        <div class="image-container">
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=4000x3000:format=jpg/path/s5dde8bff85c81b2f/image/ia932f710bc9f0af9/version/1560445533/image.jpg" alt="Chat en train de dormir">
+            <div class="spacer">Chat 6</div> <!-- Espace en bas de l'image -->
+        </div>
+    </div>
+
+</body>
+</html>

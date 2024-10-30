@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercice 0</title>
+  <style>
+    /* Conteneur rouge */
+    .boite-rouge {
+      width: 300px;              /* Largeur de la boîte rouge */
+      height: 300px;             /* Hauteur de la boîte rouge */
+      background-color: red;     /* Couleur de fond rouge */
+      display: flex;             /* Active Flexbox pour centrer le contenu */
+      justify-content: center;   /* Centre les éléments enfants horizontalement */
+      align-items: center;       /* Centre les éléments enfants verticalement */
+      margin: auto;              /* Centre la boîte rouge dans la page */
+    }
+
+    /* Conteneurs oranges */
+    .boite-orange {
+      width: 100px;              /* Largeur des boîtes oranges */
+      height: 100px;             /* Hauteur des boîtes oranges */
+      background-color: orange;  /* Couleur de fond orange */
+      margin: 10px;             /* Marge horizontale de 10px entre les deux boîtes */
+      display: flex;             /* Active Flexbox pour le contenu de chaque boîte */
+      justify-content: center;   /* Centre le texte horizontalement */
+      align-items: center;       /* Centre le texte verticalement */
+      color: white;              /* Couleur du texte en blanc */
+      font-weight: bold;         /* Rend le texte en gras */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="boite-rouge">
+    <div class="boite-orange">Lorem 1</div>
+    <div class="boite-orange">Lorem 2</div>
+  </div>
+
+</body>
+</html> 

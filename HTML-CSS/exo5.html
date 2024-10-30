@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie d'Images de Chats</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Couleur d'arrière-plan douce */
+            padding: 20px; /* Espace autour de la galerie */
+        }
+
+        .gallery-container {
+            display: flex; /* Utilise Flexbox pour contenir les images */
+            overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
+            border: 2px solid blue; /* Bordure bleue autour de la galerie */
+            background-color: white; /* Fond blanc pour le conteneur */
+            padding: 10px; /* Espace intérieur du conteneur */
+            height: 350px; /* Hauteur fixe pour le conteneur, légèrement augmentée */
+        }
+
+        .image-container {
+            flex: 0 0 auto; /* Empêche la flexibilité pour garder la largeur définie */
+            width: 300px; /* Largeur de 300px pour chaque image */
+            height: 300px; /* Hauteur de 300px pour chaque image */
+            margin-right: 10px; /* Espace de 10px à droite de chaque image */
+            position: relative; /* Position relative pour le numéro de chat */
+            overflow: hidden; /* Cache tout débordement */
+            border: 2px solid red; /* Bordure rouge autour de chaque image */
+            border-radius: 10px; /* Coins arrondis pour un effet esthétique */
+        }
+
+        img {
+            width: 100%; /* Remplit la largeur du conteneur */
+            height: 100%; /* Remplit la hauteur du conteneur */
+            object-fit: cover; /* Recouvre complètement le conteneur */
+        }
+
+        .spacer {
+            height: 30px; /* Hauteur de l'espace en bas de l'image */
+            width: 100%; /* Largeur à 100% du conteneur */
+            background-color: green; /* Couleur verte pour l'espace */
+            display: flex; /* Utilise Flexbox pour centrer le texte */
+            justify-content: center; /* Centre horizontalement le texte */
+            align-items: center; /* Centre verticalement le texte */
+            color: white; /* Couleur du texte en blanc pour contraste */
+            font-weight: bold; /* Met le texte en gras */
+            font-size: 20px; /* Taille de la police pour le numéro */
+            margin-top: 10px; /* Espace entre l'image et l'espace vert */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-container">
+        <div class="image-container">
+            <img src="https://img.freepik.com/photos-premium/groupe-adorables-chats-blottis-ensemble-dans-fort-douillet_986714-1126.jpg" alt="Groupe de chats">
+            <div class="spacer">Chat 1</div> <!-- Espace en bas de l'image -->
+        </div>
+        
+        <div class="image-container">
+            <img src="https://archzine.fr/wp-content/uploads/2016/01/image-de-chaton-trop-mignon-chatons-mignons-asleep.jpg" alt="Chaton mignon">
+            <div class="spacer">Chat 2</div> <!-- Espace en bas de l'image -->
+        </div>
+
+        <div class="image-container">
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=4000x3000:format=jpg/path/s5dde8bff85c81b2f/image/ia932f710bc9f0af9/version/1560445533/image.jpg" alt="Chat en train de dormir">
+            <div class="spacer">Chat 3</div> <!-- Espace en bas de l'image -->
+        </div>
+        
+        <div class="image-container">
+            <img src="https://archzine.fr/wp-content/uploads/2016/01/image-de-chaton-trop-mignon-chatons-mignons-asleep.jpg" alt="Chaton mignon">
+            <div class="spacer">Chat 4</div> <!-- Espace en bas de l'image -->
+        </div>
+
+        <div class="image-container">
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=4000x3000:format=jpg/path/s5dde8bff85c81b2f/image/ia932f710bc9f0af9/version/1560445533/image.jpg" alt="Chat en train de dormir">
+            <div class="spacer">Chat 5</div> <!-- Espace en bas de l'image -->
+        </div>
+        
+        <div class="image-container">
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=4000x3000:format=jpg/path/s5dde8bff85c81b2f/image/ia932f710bc9f0af9/version/1560445533/image.jpg" alt="Chat en train de dormir">
+            <div class="spacer">Chat 6</div> <!-- Espace en bas de l'image -->
+        </div>
+    </div>
+
+</body>
+</html>

@@ -20,7 +20,11 @@ const products = [
     acc[product.category].count += 1;
   
     return acc;
+
   }, {});
+
+  console.log(categoryStats);
+
   
   // Step 2: Transform into an array of category averages
   const categoryAverages = Object.keys(categoryStats).map(category => {
@@ -28,7 +32,9 @@ const products = [
     const average = total / count;
     return { category, average };
   });
-  
+   console.log(categoryAverages);
+
+   
   // Step 3: Filter categories with average price above 50
   const highPricedCategories = categoryAverages.filter(cat => cat.average > 50);
   

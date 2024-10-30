@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendy Bags</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #f8f8f8;
+            padding: 1em;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header nav a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .bag-preview, .product-preview {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .bag-item, .product-item {
+            width: 200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        footer {
+            background-color: #f8f8f8;
+            padding: 1em;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        input[type="email"] {
+            margin-top: 10px;
+            padding: 5px;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Trendy Bags</h1>
+        <nav>
+            <a href="#collection">Collection</a>
+            <a href="#products">Products</a>
+            <a href="#philosophy">Philosophy</a>
+        </nav>
+    </header>
+
+    <section id="collection">
+        <h2>Discover our bag collection</h2>
+        <button>See More</button>
+        <div class="bag-preview">
+            <div class="bag-item">
+                <img src="https://checkmybags.netlify.app/static/media/bandouliere-back-to-school.0750d39c.jpg" alt="Back to School Bag">
+                <p>Classic Collection - Back to School</p>
+                <button>Explore</button>
+            </div>
+            <div class="bag-item">
+                <img src="https://checkmybags.netlify.app/static/media/bandouliere-poignee-metal-et-bi-matiere.8bdd8c3c.jpg" alt="Metal Handle Bag">
+                <p>Classic Collection - Metal Handle</p>
+                <button>Explore</button>
+            </div>
+            <div class="bag-item">
+                <img src="https://checkmybags.netlify.app/static/media/cabas-bi-matiere-poche-devant-avec-foulard.2187cb46.jpg" alt="Two-Tone Bag with Scarf">
+                <p>Classic Collection - Two-Tone with Scarf</p>
+                <button>Explore</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Summer Collection Products</h2>
+        <div class="product-preview">
+            <div class="product-item">
+                <img src="https://checkmybags.netlify.app/static/media/string-bag-brown.1cc7fd14.jpg" alt="String Bag Brown">
+                <p>Ginger - $18.00</p>
+                <button>Shop It</button>
+            </div>
+            <div class="product-item">
+                <img src="https://checkmybags.netlify.app/static/media/ring-bag-black.863ca06f.jpg" alt="Ring Bag Black">
+                <p>Carole - $35.00</p>
+                <button>Shop It</button>
+            </div>
+            <div class="product-item">
+                <img src="https://checkmybags.netlify.app/static/media/fancy-bag-pink.836c4c46.jpg" alt="Fancy Bag Pink">
+                <p>Emma - $26.00</p>
+                <button>Shop It</button>
+            </div>
+            <div class="product-item">
+                <img src="https://checkmybags.netlify.app/static/media/classic-bag-green.16f7e151.jpg" alt="Classic Bag Green">
+                <p>Olivia - $15.00</p>
+                <button>Shop It</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>We aim to provide the best quality of bags at a fair cost.</p>
+        <p>Sign up for our newsletter:</p>
+        <input type="email" placeholder="Your email">
+        <p>&lt;/ Made with love &gt; LE REACTEUR 2019</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercice Boîte Rouge avec Boîtes Orange et Jaunes</title>
+  <style>
+    /* Style de la boîte rouge principale */
+    .boite-rouge {
+      width: 100%;                /* Prend toute la largeur de la page */
+      height: 100px;              /* Hauteur de 100px */
+      background-color: red;      /* Couleur de fond rouge */
+      display: flex;              /* Utilise Flexbox pour organiser le contenu */
+      justify-content: space-between; /* Espace entre les deux boîtes orange */
+      align-items: center;        /* Centre verticalement les boîtes orange */
+      padding: 0 20px;            /* Espace de 20px à gauche et à droite */
+      box-sizing: border-box;     /* Inclut le padding dans la taille totale */
+    }
+
+    /* Style des boîtes oranges */
+    .boite-orange {
+      width: 100px;               /* Largeur de 100px pour chaque boîte orange */
+      height: 60px;               /* Hauteur de 60px pour chaque boîte orange */
+      background-color: orange;   /* Couleur de fond orange */
+      display: flex;              /* Flexbox pour organiser les boîtes jaunes */
+      flex-direction: row;        /* Met les boîtes jaunes sur une même ligne */
+      justify-content: center;    /* Centre horizontalement les boîtes jaunes */
+      align-items: center;        /* Centre verticalement les boîtes jaunes */
+      gap: 10px;                   /* Espace de 10px entre les boîtes jaunes */
+      border: solid black;
+    }
+
+    /* Style des boîtes jaunes */
+    .boite-jaune {
+      width: 40px;                /* Largeur de 40px pour chaque boîte jaune */
+      height: 30px;               /* Hauteur de 30px pour chaque boîte jaune */
+      background-color: yellow;   /* Couleur de fond jaune */
+      display: flex;             /* Active Flexbox pour le contenu de chaque boîte */
+      justify-content: center;   /* Centre le texte horizontalement */
+      align-items: center;       /* Centre le texte verticalement */
+      font-weight: bold;         /* Rend le texte en gras */
+      border: solid black;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="boite-rouge">
+    <!-- Boîte orange à gauche avec deux boîtes jaunes à l'intérieur -->
+    <div class="boite-orange">
+      <div class="boite-jaune"> hello</div>
+      <div class="boite-jaune">there</div>
+    </div>
+    <!-- Boîte orange à droite avec deux boîtes jaunes à l'intérieur -->
+    <div class="boite-orange">
+      <div class="boite-jaune">hi</div>
+      <div class="boite-jaune">there</div>
+    </div>
+  </div>
+
+</body>
+</html>
