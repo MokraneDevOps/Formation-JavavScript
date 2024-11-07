@@ -1,0 +1,83 @@
+/* App.css */
+
+/* # # # # # # # # # # # HEADER */
+nav {
+  background-color: #cde7b0;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.headerBox {
+  background-color: #be6e46;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.headerTitle {
+  font-size: 30px;
+}
+
+.headerPen, .headerCart {
+  width: 40px;
+}
+
+.headerList {
+  display: flex;
+  gap: 10px;
+}
+
+.headerList > li {
+  list-style: none;
+  background-color: #a3bfa8;
+  padding: 5px;
+}
+
+.hoverOrange:hover {
+  background-color: #7286a0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+/* # # # # # # # # # # # HERO */
+.heroContainer {
+  border: 1px blue solid;
+  background-image: url("https://img.freepik.com/photos-premium/groupe-personnes-randonnee-sentier-dans-montagnes_1303278-67.jpg?semt=ais_hybrid");
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: white;
+  font-weight: 800;
+}
+
+/* # # # # # # # # # # # CAROUSSEL */
+.carousselContainer {
+  border: 1px green solid;
+  display: flex;
+  overflow-x: auto; /* Utiliser overflow-x pour faire défiler horizontalement */
+}
+
+.carousselArticle {
+  border: 1px orange solid;
+  margin-right: 10px; /* Espacement entre les articles */
+}
+
+.carousselArticle > img {
+  height: 200px;
+  width: 250px;
+  object-fit: cover;
+}
+
+.carousselArticle > div {
+  background-color: #be6e46;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

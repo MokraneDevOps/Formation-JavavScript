@@ -1,0 +1,39 @@
+/* Header.css */
+nav {
+    background-color: #cde7b0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.headerBox {
+    background-color: #be6e46;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.headerTitle {
+    font-size: 30px;
+}
+
+.headerPen, .headerCart {
+    width: 50px;
+}
+
+.headerList {
+    display: flex;
+    gap: 10px;
+}
+
+.headerList > li {
+    list-style: none;
+    background-color: #a3bfa8;
+    padding: 5px;
+}
+
+.hoverOrange:hover {
+    background-color: #7286a0;
+    cursor: pointer;
+    border-radius: 50%;
+}

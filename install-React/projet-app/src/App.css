@@ -1,38 +1,106 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ===========================
+   HEADER STYLES
+=========================== */
+nav {
+  background-color: #cde7b0;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* Assure que les éléments sont bien alignés */
+  padding: 10px;
+}
+
+.headerBox {
+  background-color: #be6e46;
+  display: flex;
   align-items: center;
+  padding: 10px;
+  border-radius: 5px; /* Ajoute un léger arrondi */
+}
+
+.headerTitle {
+  font-size: 30px;
+  color: white; /* Assure une bonne lisibilité sur le fond coloré */
+  font-weight: bold; /* Accentue le titre */
+}
+
+.headerPen,
+.headerCart {
+  width: 40px;
+  cursor: pointer; /* Indique que les icônes sont interactives */
+}
+
+.headerList {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.headerList > li {
+  list-style: none;
+  background-color: #a3bfa8;
+  padding: 5px 10px; /* Ajoute de l'espace pour une meilleure visibilité */
+  border-radius: 4px; /* Légèrement arrondi pour les éléments de liste */
+  color: white; /* Contraste avec le fond */
+  font-weight: 500; /* Ajoute de la structure au texte */
+}
+
+.hoverOrange:hover {
+  background-color: #7286a0;
+  cursor: pointer;
+  border-radius: 50%; /* Crée un effet rond au survol */
+}
+
+/* ===========================
+   HERO STYLES
+=========================== */
+.heroContainer {
+  border: 1px solid blue;
+  background-image: url("https://img.freepik.com/photos-premium/groupe-personnes-randonnee-sentier-dans-montagnes_1303278-67.jpg?semt=ais_hybrid");
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  font-size: 50px;
   color: white;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Améliore la lisibilité du texte */
 }
 
-.App-link {
-  color: #61dafb;
+/* ===========================
+   CAROUSSEL STYLES
+=========================== */
+.carousselContainer {
+  border: 1px solid green;
+  display: flex;
+  overflow-x: auto; /* Ajuste l’overflow uniquement en horizontal */
+  padding: 10px; /* Ajoute de l'espace autour du contenu */
+  gap: 15px; /* Espace entre chaque article du carrousel */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.carousselArticle {
+  border: 1px solid orange;
+  flex-shrink: 0; /* Empêche les articles de rétrécir dans le carrousel */
+  width: 250px;
+  border-radius: 8px; /* Adoucit les bords de chaque article */
+  overflow: hidden; /* Cache l'excès de contenu */
+}
+
+.carousselArticle > img {
+  height: 200px;
+  width: 100%; /* S'ajuste à la largeur de l'article */
+  object-fit: cover;
+}
+
+.carousselArticle > div {
+  background-color: #be6e46;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white; /* Assure un bon contraste avec le fond */
+  font-weight: 500;
 }

@@ -1,0 +1,20 @@
+/* CarouselItem.css */
+.carousselArticle {
+    border: 1px orange solid;
+    margin-right: 10px; /* Espacement entre les articles */
+}
+
+.carousselArticle > img {
+    height: 200px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.carousselArticle > div {
+    background-color: #be6e46;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

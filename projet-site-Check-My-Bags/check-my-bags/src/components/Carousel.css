@@ -1,0 +1,8 @@
+/* Carousel.css */
+.carousselContainer {
+    border: 1px green solid;
+    display: flex;
+    overflow-x: auto; 
+    width: auto;
+    height: auto;
+}

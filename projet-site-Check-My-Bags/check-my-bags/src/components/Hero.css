@@ -1,0 +1,14 @@
+/* Hero.css */
+.heroContainer {
+    border: 1px blue solid;
+    background-image: url("https://img.freepik.com/photos-premium/groupe-personnes-randonnee-sentier-dans-montagnes_1303278-67.jpg?semt=ais_hybrid");
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: white;
+    font-weight: 800;
+}
