@@ -1,7 +1,12 @@
+/* Centrage du texte */
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  padding: 20px;
 }
 
+/* Logo avec effet de rotation */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,21 +18,30 @@
   }
 }
 
+/* En-tête principal de l'application */
 .App-header {
-  background-color: #282c34;
+  background-color: #2b2e4a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(12px + 2vmin);
   color: white;
+  padding: 40px 20px;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #fb6161;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
+.App-link:hover {
+  color: #b3f121;
+}
+
+/* Animation pour le logo */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +49,70 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Styles pour les sections de catégorie */
+.category-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* Boutons pour ajouter des articles */
+button {
+  background-color: #fb8561;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #21f166;
+}
+
+/* Style de la carte pour chaque élément du panier */
+.cart-item {
+  background-color: #fff;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Bouton de suppression d'article */
+.cart-item button {
+  background-color: #ff6961;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+  background-color: #ff4741;
+}
+
+/* Styles pour la liste des éléments */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  width: 100%;
+}
+
+h1 {
+  color: #2b2e4a;
+  margin-bottom: 20px;
 }
