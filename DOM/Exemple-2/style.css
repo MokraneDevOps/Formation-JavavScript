@@ -1,0 +1,29 @@
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+p {
+    visibility: hidden;
+}
+
+.click_event {
+    background-color: yellow;
+    padding: 20px;
+    border-radius: 50px;
+    margin: 5px;
+}
+
+#btn_1, #btn_2 {
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+}
+
+#btn_1 {
+    background-color: lightgray;
+}
+
+#btn_2 {
+    background-color: lightgray;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exo1</title>
+    <style>
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: blue;
+        }
+        .centre {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: lightblue;
+        }
+        button:hover {
+            background-color: dodgerblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="centre">
+        <button type="button" id="clickButton">Cliquez ici</button>
+        <div class="output" id="outputMessage"></div>
+    </div>
+
+    <script>
+        // Sélectionner le bouton et le conteneur d'affichage
+        const button = document.querySelector('#clickButton');
+        const outputDiv = document.querySelector('#outputMessage');
+
+        // Ajouter un gestionnaire d'événement pour le clic sur le bouton
+        button.addEventListener('click', () => {
+            outputDiv.textContent = "Vous avez cliqué !";
+        });
+    </script>
+</body>
+</html>
