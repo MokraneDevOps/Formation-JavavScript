@@ -1,14 +1,16 @@
-//import packages
+// Importer les packages nécessaires
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-//import pages called with routes
+// Importer les pages utilisées dans les routes
 import Offers from "./containers/Offers";
 import OneOffer from "./containers/OneOffer";
 import SignUp from "./containers/SignUp";
 import Publish from "./containers/Publish";
 
-//import components
+// Importer les composants
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -16,23 +18,35 @@ const App = () => {
   return (
     <Router>
       {/* # # # # # # # HEADER # # # # # # # # # # # #  */}
-      <Header user={"mokrane"} />
+      <Header user={" "} />
       <div className="headerGhost"></div>
+
+      {/* ToastContainer pour les notifications */}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={2000}
+        hideProgressBar={true}
+        theme="light"
+      />
+
+      {/* Route principale */}
       <main>
         <Routes>
-          {/* # # # # # # # ROUTE FOR 1 Offer DISPLAY # # # # # # # # # # # #  */}
+          {/* Route pour afficher une offre spécifique */}
           <Route path="/oneoffer/:id" element={<OneOffer />} />
 
-          {/* # # # # # # # ROUTE PUBLISH # # # # # # # # # # # #  */}
+          {/* Route pour publier une annonce */}
           <Route path="/publish" element={<Publish />} />
 
-          {/* # # # # # # # ROUTE FOR SIGN UP # # # # # # # # # # # #  */}
+          {/* Route pour l'inscription */}
           <Route path="/signup" element={<SignUp />} />
 
-          {/* # # # # # # # DEFAULT ROUTE : ALL OFFERS  # # # # # # # # # # # #  */}
+          {/* Route par défaut : affiche toutes les offres */}
           <Route path="/" element={<Offers />} />
         </Routes>
       </main>
+
+      {/* Footer de la page */}
       <Footer />
     </Router>
   );
